@@ -6,12 +6,12 @@
 | ------------------ | ------ | ----------- |
 | email              | string | null: false |
 | encrypted_password | string | null: false |
-| nickname           | string | ----------- |
+| nickname           | string | null: false |
 | last_name          | string | null: false |
 | first_name         | string | null: false |
 | kana_last_name     | string | null: false |
 | kana_first_name    | string | null: false |
-| birthday           | string | null: false |
+| birthday           | date   | null: false |
 
 ### Association
 
@@ -59,7 +59,7 @@
 | municipality                | string     | null: false                |
 | address                     | string     | null: false                |
 | building                    | string     | -------------------------- |
-| phone_number                | integer    | null: false                |
+| phone_number                | string     | null: false                |
 | order                       | references | null: false, foreign: true |
 
 ### Association
