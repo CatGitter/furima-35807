@@ -12,8 +12,8 @@ describe User do
       end
 
       it 'passwordが6文字以上であれば登録できる' do
-        @user.password = '123456'
-        @user.password_confirmation = '123456'
+        @user.password = '123abc'
+        @user.password_confirmation = '123abc'
         expect(@user).to be_valid
       end
     end
@@ -81,11 +81,37 @@ describe User do
         expect(@user.errors.full_messages).to include("Password confirmation doesn't match Password")
       end
 
+      it '半角英語のみは登録できない' do
+        @user.password = 'aaaaaa'
+        @user.password_confirmation = 'aaaaaa' 
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Password is invalid")
+      end
+      it '数字のみは登録できない' do
+        @user.password = '111111'
+        @user.password_confirmation = '111111' 
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Password is invalid")
+      end
+
+      it '全角英数混合は登録できない' do
+        @user.password = 'AAA１１１'
+        @user.password_confirmation = 'AAA１１１' 
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Password is invalid")
+      end
+
       it '重複したemailが存在すると登録できない' do
         @user.save
         another_user = FactoryBot.build(:user, email: @user.email)
         another_user.valid?
         expect(another_user.errors.full_messages).to include('Email has already been taken')
+      end
+
+      it 'emailに＠がない場合ユーザー登録ができない' do
+        @user.email = 'aaa.com'
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Email is invalid")
       end
 
       it 'last_nameは、全角（漢字・ひらがな・カタカナ）での入力でないと登録できない' do
