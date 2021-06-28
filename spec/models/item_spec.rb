@@ -32,31 +32,31 @@ describe Item do
       end
 
       it 'categoryが空では出品できない' do
-        @item.category_id = '1'
+        @item.category_id = 1
         @item.valid?
         expect(@item.errors.full_messages).to include("Category must be other than 1")
       end
 
       it 'statusが空では出品できない' do
-        @item.status_id = '1'
+        @item.status_id = 1
         @item.valid?
         expect(@item.errors.full_messages).to include("Status must be other than 1")
       end
 
       it 'burdenが空では出品できない' do
-        @item.burden_id = '1'
+        @item.burden_id = 1
         @item.valid?
         expect(@item.errors.full_messages).to include("Burden must be other than 1")
       end
 
       it 'prefectureが空では出品できない' do
-        @item.prefecture_id = '1'
+        @item.prefecture_id = 1
         @item.valid?
         expect(@item.errors.full_messages).to include("Prefecture must be other than 1")
       end
 
       it 'delivery_dayが空では出品できない' do
-        @item.delivery_day_id = '1'
+        @item.delivery_day_id = 1
         @item.valid?
         expect(@item.errors.full_messages).to include("Delivery day must be other than 1")
       end
@@ -73,14 +73,26 @@ describe Item do
         expect(@item.errors.full_messages).to include("Price is not included in the list")
       end
 
+      it 'priceが半角英数混合では登録できない' do
+        @item.price = '300a'
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Price is not a number")
+      end
+
+      it 'priceが半角英語では登録できない' do
+        @item.price = 'aaa'
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Price is not included in the list")
+      end
+
       it 'priceが299円以下だと出品できない' do
-        @item.price = '299'
+        @item.price = 299
         @item.valid?
         expect(@item.errors.full_messages).to include("Price is not included in the list")
       end
 
       it 'priceが10,000,000円以上だと出品できない' do
-        @item.price = '10000000'
+        @item.price = 10000000
         @item.valid?
         expect(@item.errors.full_messages).to include("Price is not included in the list")
       end

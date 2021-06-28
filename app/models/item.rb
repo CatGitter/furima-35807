@@ -13,12 +13,14 @@ class Item < ApplicationRecord
     validates :image
     validates :title
     validates :description
-    validates_inclusion_of :price, in:300..9999999
+    validates :price, numericality: true, inclusion: {in:300..9999999}
   end
-  validates :category_id,     numericality: { other_than: 1 }
-  validates :status_id,       numericality: { other_than: 1 }
-  validates :burden_id,       numericality: { other_than: 1 }
-  validates :prefecture_id,   numericality: { other_than: 1 }
-  validates :delivery_day_id, numericality: { other_than: 1 }
 
+  with_options numericality: { other_than: 1 } do
+    validates :category_id
+    validates :status_id
+    validates :burden_id
+    validates :prefecture_id
+    validates :delivery_day_id
+  end
 end
