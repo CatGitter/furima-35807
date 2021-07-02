@@ -53,7 +53,7 @@
 ## addressesテーブル
 
 | Column                      | Type       | Options                        |
-| --------------------------- | -------    | ------------------------------ |
+| --------------------------- | ---------- | ------------------------------ |
 | postal                      | string     | null: false                    |
 | prefecture_id               | integer    | null: false                    |
 | municipality                | string     | null: false                    |
