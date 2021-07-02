@@ -34,8 +34,9 @@
     <%= form_with model: @order_address, url: item_orders_path, id: 'charge-form', class: 'transaction-form-wrap',local: true do |f| %>
 
     <%= render 'shared/error_messages', model: f.object %>
+    
     <%# カード情報の入力 %>
-    <%#<div class='credit-card-form'>
+    <div class='credit-card-form'>
       <h1 class='info-input-haedline'>
         クレジットカード情報入力
       </h1>
@@ -57,10 +58,10 @@
           <label class="form-text">有効期限</label>
           <span class="indispensable">必須</span>
         </div>
-        <%#<div class='input-expiration-date-wrap'>
+        <div class='input-expiration-date-wrap'>
           <%= f.text_area :exp_month, class:"input-expiration-date", id:"card-exp-month", placeholder:"例)3" %>
           <p>月</p>
-          <%#<%= f.text_area :exp_year, class:"input-expiration-date", id:"card-exp-year", placeholder:"例)23" %>
+          <%= f.text_area :exp_year, class:"input-expiration-date", id:"card-exp-year", placeholder:"例)23" %>
           <p>年</p>
         </div>
       </div>
@@ -69,7 +70,7 @@
           <label class="form-text">セキュリティコード</label>
           <span class="indispensable">必須</span>
         </div>
-        <%#<%= f.text_field :cvc, class:"input-default", id:"card-cvc", placeholder:"カード背面4桁もしくは3桁の番号", maxlength:"4" %>
+        <%= f.text_field :cvc, class:"input-default", id:"card-cvc", placeholder:"カード背面4桁もしくは3桁の番号", maxlength:"4" %>
       </div>
     </div>
     <%# /カード情報の入力 %>
@@ -124,7 +125,7 @@
     </div>
     <%# /配送先の入力 %>
     <div class='buy-btn'>
-      <%= f.submit "購入" ,class:"buy-red-btn" %>
+      <%= f.submit "購入" ,class:"buy-red-btn", id: "buy-red-btn" %>
     </div>
     <% end %>
   </div>
