@@ -105,8 +105,14 @@ describe OrderAddress do
         expect(@order_address.errors.full_messages).to include("Phone number is invalid")
       end
 
-      it 'phone_numberが全角数字以外では保存できない' do
+      it 'phone_numberが全角数字では保存できない' do
         @order_address.phone_number = '１２３４５６７８９０'
+        @order_address.valid?
+        expect(@order_address.errors.full_messages).to include("Phone number is invalid")
+      end
+
+      it 'phone_numberが半角文字では保存できない' do
+        @order_address.phone_number = 'aaaaaaaaaa'
         @order_address.valid?
         expect(@order_address.errors.full_messages).to include("Phone number is invalid")
       end
